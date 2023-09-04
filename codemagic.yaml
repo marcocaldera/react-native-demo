@@ -12,7 +12,7 @@ workflows:
       groups:
         - google_play # <-- (Includes GCLOUD_SERVICE_ACCOUNT_CREDENTIALS <-- Put your google-services.json)
       vars:
-        PACKAGE_NAME: 'io.codemagic.sample.reactnative' # <-- Put your package name here e.g. com.domain.myapp
+        PACKAGE_NAME: 'com.reactnativedemo'
       node: v16.11.1
     scripts:
       - name: Install npm dependencies
@@ -31,7 +31,7 @@ workflows:
             UPDATED_BUILD_NUMBER=$(($LATEST_GOOGLE_PLAY_BUILD_NUMBER + 1))
           fi
           cd android
-          ./gradlew bundleRelease \
+          ./gradlew assembleRelease \
             -PversionCode=$UPDATED_BUILD_NUMBER \
             -PversionName=1.0.$UPDATED_BUILD_NUMBER
     artifacts:
@@ -39,14 +39,10 @@ workflows:
     publishing:
       email:
         recipients:
-          - user_1@example.com
-          - user_2@example.com
+          - fevowen667@searpen.com
         notify:
-          success: true # To not receive a notification when a build succeeds
-          failure: false # To not receive a notification when a build fails
-      google_play:
-        credentials: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
-        track: alpha # Any default or custom track that is not in ‘draft’ status
+          success: true
+          failure: true
   react-native-ios:
     name: React Native iOS
     max_build_duration: 120
