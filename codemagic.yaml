@@ -39,7 +39,7 @@ workflows:
     publishing:
       email:
         recipients:
-          - fevowen667@searpen.com
+          - caldux@me.com
         notify:
           success: true
           failure: true
